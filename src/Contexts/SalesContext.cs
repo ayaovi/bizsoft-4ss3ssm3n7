@@ -5,6 +5,13 @@ namespace bizsoft_4ss3ssm3n7.Contexts
 {
   public class SalesContext : DbContext
   {
+    public DbSet<Client> Clients { get; set; }
+
+    public DbSet<Order> Orders { get; set; }
+
+    public DbSet<Item> Items { get; set; }
+
+    public DbSet<Material> Materials { get; set; }
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
       optionsBuilder.UseMySql("server=localhost;database=sales;user=root;password=h3rm4nn");

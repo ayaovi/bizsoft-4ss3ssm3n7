@@ -1,7 +1,37 @@
-﻿@{
+﻿@model IEnumerable<Client>
+
+@{
   ViewData["Title"] = "About";
 }
 <h2>@ViewData["Title"]</h2>
 <h3>@ViewData["Message"]</h3>
 
 <p>Use this area to provide additional information.</p>
+
+<table class="table">
+  <tr>
+    <th>
+      Id
+    </th>
+    <th>
+      FirstName
+    </th>
+    <th>
+      LastName
+    </th>
+  </tr>
+  @foreach (var item in Model)
+  {
+  <tr>
+    <td>
+      @Html.DisplayFor(x => item.Id)
+    </td>
+    <td>
+      @Html.DisplayFor(x => item.FirstName)
+    </td>
+    <td>
+      @Html.DisplayFor(x => item.LastName)
+    </td>
+  </tr>
+  }
+</table>

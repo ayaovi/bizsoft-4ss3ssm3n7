@@ -1,6 +1,8 @@
 ﻿using System.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
 using bizsoft_4ss3ssm3n7.Models;
+using bizsoft_4ss3ssm3n7.Contexts;
+using System.Linq;
 
 namespace bizsoft_4ss3ssm3n7.Controllers
 {
@@ -15,7 +17,11 @@ namespace bizsoft_4ss3ssm3n7.Controllers
     {
       ViewData["Message"] = "Your application description page.";
 
-      return View();
+      using(var context = new SalesContext())
+      {
+        var clients = context.Clients.ToList();
+        return View(clients);
+      }
     }
 
     public IActionResult Contact()
