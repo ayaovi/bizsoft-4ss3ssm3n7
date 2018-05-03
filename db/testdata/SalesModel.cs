@@ -22,7 +22,18 @@ namespace testdata
 
     public virtual Client Client { get; set; }
 
-    public virtual ICollection<Item> StockItems { get; set; }
+    public virtual ICollection<OrderLine> OrderLines { get; set; }
+  }
+
+  public class OrderLine
+  {
+    public Guid Id { get; set; }
+
+    public int Quantity { get; set; }
+
+    public virtual Item Item { get; set; }
+
+    public virtual Order Order { get; set; }
   }
 
   public class Item
@@ -32,7 +43,7 @@ namespace testdata
 
     public string Description { get; set; }
 
-    public Material Material { get; set; }
+    public virtual Material Material { get; set; }
   }
 
   public class Material

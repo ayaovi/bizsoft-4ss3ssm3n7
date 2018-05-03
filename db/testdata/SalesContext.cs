@@ -38,7 +38,16 @@ namespace testdata
       {
         entity.HasKey(e => e.Id);
         entity.HasOne(e => e.Client)
-          .WithMany(c => c.Orders);
+              .WithMany(c => c.Orders);
+      });
+
+      modelBuilder.Entity<OrderLine>(entity =>
+      {
+        entity.HasKey(e => e.Id);
+        entity.Property(e => e.Quantity).IsRequired();
+        entity.HasOne(e => e.Item);
+        entity.HasOne(e => e.Order)
+              .WithMany(o => o.OrderLines);
       });
 
       modelBuilder.Entity<Item>(entity =>

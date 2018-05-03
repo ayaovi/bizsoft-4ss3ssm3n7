@@ -36,7 +36,7 @@ namespace bizsoft_4ss3ssm3n7.Contexts
 
       modelBuilder.Entity<Order>(entity =>
       {
-        entity.HasKey(e => e.Id);
+        entity.HasKey(e => new { e.Id, ItemId = e.Item.Id });
         entity.HasOne(e => e.Client)
               .WithMany(c => c.Orders);
       });
