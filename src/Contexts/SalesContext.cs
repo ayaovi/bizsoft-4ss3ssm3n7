@@ -9,9 +9,12 @@ namespace bizsoft_4ss3ssm3n7.Contexts
 
     public DbSet<Order> Orders { get; set; }
 
+    public DbSet<OrderLine> OrderLines { get; set; }
+
     public DbSet<Item> Items { get; set; }
 
     public DbSet<Material> Materials { get; set; }
+
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
       optionsBuilder.UseMySql("server=localhost;database=sales;user=root;password=h3rm4nn");
@@ -19,8 +22,6 @@ namespace bizsoft_4ss3ssm3n7.Contexts
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
-      base.OnModelCreating(modelBuilder);
-
       modelBuilder.Entity<Material>(entity =>
       {
         entity.HasKey(e => e.Id);
@@ -36,9 +37,18 @@ namespace bizsoft_4ss3ssm3n7.Contexts
 
       modelBuilder.Entity<Order>(entity =>
       {
-        entity.HasKey(e => new { e.Id, ItemId = e.Item.Id });
+        entity.HasKey(e => e.Id);
         entity.HasOne(e => e.Client)
-              .WithMany(c => c.Orders);
+          .WithMany(c => c.Orders);
+      });
+
+      modelBuilder.Entity<OrderLine>(entity =>
+      {
+        entity.HasKey(e => e.Id);
+        entity.Property(e => e.Quantity).IsRequired();
+        entity.HasOne(e => e.Item);
+        entity.HasOne(e => e.Order)
+          .WithMany(o => o.OrderLines);
       });
 
       modelBuilder.Entity<Item>(entity =>

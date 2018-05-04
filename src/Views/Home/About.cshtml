@@ -1,4 +1,4 @@
-﻿@model IEnumerable<Client>
+﻿@model IEnumerable<Order>
 
 @{
   ViewData["Title"] = "About";
@@ -14,10 +14,7 @@
       Id
     </th>
     <th>
-      FirstName
-    </th>
-    <th>
-      LastName
+      ClientId
     </th>
   </tr>
   @foreach (var item in Model)
@@ -27,10 +24,7 @@
       @Html.DisplayFor(x => item.Id)
     </td>
     <td>
-      @Html.DisplayFor(x => item.FirstName)
-    </td>
-    <td>
-      @Html.DisplayFor(x => item.LastName)
+      @Html.DisplayFor(x => item.Client.Id)
     </td>
   </tr>
   }

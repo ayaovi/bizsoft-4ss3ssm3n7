@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using bizsoft_4ss3ssm3n7.Models;
 using bizsoft_4ss3ssm3n7.Contexts;
 using System.Linq;
+using Microsoft.EntityFrameworkCore;
 
 namespace bizsoft_4ss3ssm3n7.Controllers
 {
@@ -15,12 +16,12 @@ namespace bizsoft_4ss3ssm3n7.Controllers
 
     public IActionResult About()
     {
-      ViewData["Message"] = "Your application description page.";
+      ViewData["Message"] = "Using this for orders at the moment.";
 
       using(var context = new SalesContext())
       {
-        var clients = context.Clients.ToList();
-        return View(clients);
+        var orders = context.Orders.Include(x => x.OrderLines).ToList();
+        return View(orders);
       }
     }
 

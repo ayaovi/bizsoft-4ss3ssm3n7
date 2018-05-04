@@ -9,6 +9,6 @@ namespace bizsoft_4ss3ssm3n7.Models
 
     public string Description { get; set; }
 
-    public Material Material { get; set; }
+    public virtual Material Material { get; set; }
   }
 }
