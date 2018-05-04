@@ -8,6 +8,8 @@ namespace testdata
 
     public DbSet<Order> Orders { get; set; }
 
+    public DbSet<OrderLine> OrderLines { get; set; }
+
     public DbSet<Item> Items { get; set; }
 
     public DbSet<Material> Materials { get; set; }
