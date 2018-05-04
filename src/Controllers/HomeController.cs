@@ -21,8 +21,8 @@ namespace bizsoft_4ss3ssm3n7.Controllers
       using(var context = new SalesContext())
       {
         var orders = context.Orders
-          .Include(x => x.Client)
-          .Include(x => x.OrderLines).ToList();
+                            .Include(x => x.Client)
+                            .Include(x => x.OrderLines).ToList();
         return View(orders);
       }
     }
