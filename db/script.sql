@@ -10,7 +10,7 @@ create table if not exists materials (
 # retrieve table schemas.
 describe materials;
 describe items;
-describe orderline;
+describe orderlines;
 describe orders;
 describe clients;
 
@@ -34,8 +34,23 @@ insert into items (Description) values ('table frame');
 
 select * from items;
 
+# populating orders table.
+insert into orders (Id, ClientId) values ('e8cf122b-7feb-4bb7-8035-f9b253d8649a', 1);
+
+select * from orders;
+
+# populating ordelines.
+insert into orderlines (Id, ItemId, OrderId, Quantity) values (
+	'97add193-495a-4cb5-a588-2ba3607f0729',
+    1,
+    'e8cf122b-7feb-4bb7-8035-f9b253d8649a',
+    2
+);
+
+select * from orderlines;
+
 # dropping the tables.
-drop table orderline;
+drop table orderlines;
 drop table items;
 drop table materials;
 drop table orders;
