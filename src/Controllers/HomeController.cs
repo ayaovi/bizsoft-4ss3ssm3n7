@@ -20,6 +20,8 @@ namespace bizsoft_4ss3ssm3n7.Controllers
 
       using(var context = new SalesContext())
       {
+        context.Materials.Load();
+        context.Items.Load();
         var orders = context.Orders
                             .Include(x => x.Client)
                             .Include(x => x.OrderLines).ToList();

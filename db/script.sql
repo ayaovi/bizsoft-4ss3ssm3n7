@@ -30,7 +30,7 @@ insert into materials (Description) values ('steel');
 select * from materials;
 
 # populating stock items tables.
-insert into items (Description) values ('table frame');
+insert into items (Description, MaterialId) values ('table frame', 1);
 
 select * from items;
 

@@ -22,6 +22,8 @@ namespace bizsoft_4ss3ssm3n7.Contexts
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
+      base.OnModelCreating(modelBuilder);
+
       modelBuilder.Entity<Material>(entity =>
       {
         entity.HasKey(e => e.Id);
@@ -39,23 +41,29 @@ namespace bizsoft_4ss3ssm3n7.Contexts
       {
         entity.HasKey(e => e.Id);
         entity.HasOne(e => e.Client)
-          .WithMany(c => c.Orders);
+              .WithMany(c => c.Orders)
+              .IsRequired();
       });
 
       modelBuilder.Entity<OrderLine>(entity =>
       {
         entity.HasKey(e => e.Id);
         entity.Property(e => e.Quantity).IsRequired();
-        entity.HasOne(e => e.Item);
+        entity.HasOne(e => e.Item)
+          .WithOne()
+          .IsRequired();
         entity.HasOne(e => e.Order)
-          .WithMany(o => o.OrderLines);
+              .WithMany(o => o.OrderLines)
+              .IsRequired();
       });
 
       modelBuilder.Entity<Item>(entity =>
       {
         entity.HasKey(e => e.Id);
         entity.Property(e => e.Description).IsRequired();
-        entity.HasOne(e => e.Material);
+        entity.HasOne(e => e.Material)
+              .WithOne()
+              .IsRequired();
       });
     }
   }

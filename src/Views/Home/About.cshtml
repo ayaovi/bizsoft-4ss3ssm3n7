@@ -20,6 +20,8 @@
   </tr>
   @foreach (var item in Model)
   {
+    @*@Html.Hidden("lines", Enumerable.Empty<OrderLine>())*@
+    //var orderLines = item.OrderLines;
     <tr>
       <td>
         @Html.DisplayFor(x => item.Id)
@@ -28,28 +30,48 @@
         @Html.DisplayFor(x => item.Client.Id)
       </td>
       <td>
-        <button id="myBtn">Edit</button>
-        <button>Delete</button>
+        <button id="editBtn" onclick="ShowOrderLines()">Edit</button>
+        <button id="deleteBtn">Delete</button>
       </td>
     </tr>
   }
 </table>
 
 <div id="myModal" class="modal">
-
   <!-- Modal content -->
   <div class="modal-content">
     <div class="modal-header">
       <span class="close">&times;</span>
-      <h2>Modal Header</h2>
     </div>
     <div class="modal-body">
-      <p>Some text in the Modal Body</p>
-      <p>Some other text...</p>
+      <table>
+        <tr>
+          <th>
+            Id
+          </th>
+          <th>
+            ItemId
+          </th>
+          <th>
+            OrderId
+          </th>
+          <th>
+            Quantity
+          </th>
+        </tr>
+        @foreach (var item in Model.First().OrderLines)
+        {
+          <tr>
+            <td><input type="text" value="@item.Id" /></td>
+            <td><input type="number" value="@item.Item.Id" /></td>
+            <td><input type="text" value="@item.Order.Id" /></td>
+            <td><input type="number" value="@item.Quantity" /></td>
+          </tr>
+        }
+      </table>
     </div>
     <div class="modal-footer">
-      <h3>Modal Footer</h3>
+      <button>Save</button>
     </div>
   </div>
-
 </div>
