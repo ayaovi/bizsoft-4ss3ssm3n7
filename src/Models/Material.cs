@@ -2,6 +2,7 @@
 
 namespace bizsoft_4ss3ssm3n7.Models
 {
+  [Table("materials")]
   public class Material
   {
     [DatabaseGenerated(DatabaseGeneratedOption.Identity)]

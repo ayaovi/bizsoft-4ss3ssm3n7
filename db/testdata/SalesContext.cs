@@ -49,7 +49,7 @@ namespace testdata
         entity.HasKey(e => e.Id);
         entity.Property(e => e.Quantity).IsRequired();
         entity.HasOne(e => e.Item)
-              .WithOne()
+              .WithMany()
               .IsRequired();
         entity.HasOne(e => e.Order)
               .WithMany(o => o.OrderLines)
@@ -61,7 +61,7 @@ namespace testdata
         entity.HasKey(e => e.Id);
         entity.Property(e => e.Description).IsRequired();
         entity.HasOne(e => e.Material)
-              .WithOne()
+              .WithMany()
               .IsRequired();
       });
     }

@@ -31,6 +31,7 @@ select * from materials;
 
 # populating stock items tables.
 insert into items (Description, MaterialId) values ('table frame', 1);
+insert into items (Description, MaterialId) values ('window frame', 1);
 
 select * from items;
 

@@ -1,7 +1,15 @@
-﻿@model IEnumerable<Order>
+﻿@using System.Collections
+@using Newtonsoft.Json
+@model IEnumerable<Order>
+
+@*@Html.Raw(JsonConvert.SerializeObject(Model, Formatting.Indented, new JsonSerializerSettings
+{
+  ReferenceLoopHandling = ReferenceLoopHandling.Ignore
+}))*@
 
 @{
   ViewData["Title"] = "About";
+  ViewData["OrderLines"] = Enumerable.Empty<OrderLine>();
 }
 <h2>@ViewData["Title"]</h2>
 <h3>@ViewData["Message"]</h3>
@@ -20,8 +28,6 @@
   </tr>
   @foreach (var item in Model)
   {
-    @*@Html.Hidden("lines", Enumerable.Empty<OrderLine>())*@
-    //var orderLines = item.OrderLines;
     <tr>
       <td>
         @Html.DisplayFor(x => item.Id)
@@ -30,7 +36,14 @@
         @Html.DisplayFor(x => item.Client.Id)
       </td>
       <td>
-        <button id="editBtn" onclick="ShowOrderLines()">Edit</button>
+        @{
+          var orderlines = JsonConvert.SerializeObject(item.OrderLines, Formatting.Indented, new JsonSerializerSettings
+          {
+            ReferenceLoopHandling = ReferenceLoopHandling.Ignore,
+            PreserveReferencesHandling = PreserveReferencesHandling.None
+          });
+        }
+        <button id="editBtn" onclick="ShowOrderLines('@orderlines');">Edit</button>
         <button id="deleteBtn">Delete</button>
       </td>
     </tr>
@@ -44,7 +57,7 @@
       <span class="close">&times;</span>
     </div>
     <div class="modal-body">
-      <table>
+      <table id="ordLineTbl">
         <tr>
           <th>
             Id
@@ -59,15 +72,6 @@
             Quantity
           </th>
         </tr>
-        @foreach (var item in Model.First().OrderLines)
-        {
-          <tr>
-            <td><input type="text" value="@item.Id" /></td>
-            <td><input type="number" value="@item.Item.Id" /></td>
-            <td><input type="text" value="@item.Order.Id" /></td>
-            <td><input type="number" value="@item.Quantity" /></td>
-          </tr>
-        }
       </table>
     </div>
     <div class="modal-footer">

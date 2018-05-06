@@ -3,6 +3,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace bizsoft_4ss3ssm3n7.Models
 {
+  [Table("clients")]
   public class Client
   {
     public string FirstName { get; set; }

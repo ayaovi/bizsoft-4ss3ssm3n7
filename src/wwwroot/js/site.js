@@ -12,8 +12,22 @@ var deleteBtn = document.getElementById("deleteBtn");
 var span = document.getElementsByClassName("close")[0];
 
 // When the user clicks the button, open the modal 
-function ShowOrderLines() {
-  //$("#lines").val(orderlines);
+function ShowOrderLines(orderline) {
+  var table = document.getElementById("ordLineTbl");
+
+  orderline.forEach(x => {
+    var row = table.insertRow(0);
+    var id = row.insertCell(0);
+    var itemId = row.insertCell(1);
+    var orderId = row.insertCell(2);
+    var quantity = row.insertCell(3);
+
+    id.innerHTML = x.id;
+    itemId.innerHTML = x.itemId;
+    orderId.innerHTML = x.orderId;
+    quantity.innerHTML = x.quantity;
+  });
+
   modal.style.display = "block";
 }
 
